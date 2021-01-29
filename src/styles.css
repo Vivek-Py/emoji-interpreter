@@ -2,3 +2,37 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.inputBox {
+  margin-top: 50px;
+  text-align: center;
+  height: 10vh;
+}
+
+.meaningDiv {
+  border: solid 2px #ef2fef;
+  padding: 10px;
+  font-size: 25px;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.emojiList {
+  padding: 8px;
+  font-size: 40px;
+  margin-left: 5px;
+}
+
+.emojiCollection {
+  margin: 30px;
+}
+
+span {
+  border: solid 1px;
+  padding: 5px;
+}
+
+span::selection {
+  background-color: #ef2fef;
+}

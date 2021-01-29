@@ -2,73 +2,48 @@ import React, { useState } from "react";
 import "./styles.css";
 
 export default function App() {
-  const [meaning, setMeaning] = useState("");
-  const [textInput, setTextInput] = useState("");
-
-  const emojiDictionary = {
-    "😊": "smiling",
-    "😳": "disbelief",
-    "😔": "sad",
-    "🥡": "takeout box",
-    "🙄": "Rolling Eyes",
-    "😐": "annoyance",
-    "😆": "squinting face"
+  var meaning;
+  const emoDict = {
+    "💌": "love letter",
+    "😀": "grinning face",
+    "🥳": "partying face",
+    "🥰": "smiling face with hearts"
   };
 
-  const emojis = Object.keys(emojiDictionary);
+  var emojiArray = Object.keys(emoDict);
+  const [inMeaning, setMeaning] = useState("Nothing entered/selected");
 
-  const emojiInputHandler = (event) => {
-    let userInput = event.target.value;
-
-    let meaning = emojiDictionary[userInput];
-
-    if (!meaning && userInput) {
-      meaning = "we don't have this in our database";
+  function changeHandler(event) {
+    var inputEmoji = event.target.value;
+    meaning = emoDict[inputEmoji];
+    if (meaning === undefined) {
+      setMeaning("Not in our dictionary!");
+    } else {
+      setMeaning(meaning);
     }
-    setMeaning(meaning);
-    setTextInput(userInput);
-  };
+  }
 
-  const emojiClickHandler = (emoji) => {
-    let meaning = emojiDictionary[emoji];
-    setMeaning(meaning);
-  };
-
-  const resetHandler = (input) => {
-    setMeaning("");
-    setTextInput("");
-  };
+  function clickHandler(emoji) {
+    setMeaning(emoDict[emoji]);
+  }
 
   return (
     <div className="App">
-      <h1>
-        Know Your <span className="yellow"> Emoji</span>
-      </h1>
-
-      <div className={"head"}>
-        <h2>{meaning}</h2>
-      </div>
-
-      <div className="inputDiv">
-        <input
-          placeholder={"Enter an emoji here"}
-          onChange={emojiInputHandler}
-          value={textInput}
-        />
-
-        <button onClick={resetHandler}>Reset</button>
-      </div>
-
-      <h3>Know The meaning of these Emojis</h3>
-
-      <div className="emojiDiv">
-        {emojis.map((i) => {
+      <input
+        className="inputBox"
+        onChange={changeHandler}
+        placeholder="Enter your emoji here!"
+      />
+      <div className="meaningDiv">{inMeaning}</div>
+      <div className="emojiCollection">
+        {emojiArray.map((emoji) => {
           return (
             <span
-              className="emojiBox"
-              onClick={emojiClickHandler.bind(this, i)}
+              className="emojiList"
+              onClick={() => clickHandler(emoji)}
+              key={emoji}
             >
-              {i}
+              {emoji}
             </span>
           );
         })}
